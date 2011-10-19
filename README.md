@@ -11,14 +11,28 @@ You must have: Python v2.7, virtualenv, and pip
 (Install these packages via your OS package manager)
 
 Clone this repo somewhere
-    git clone https://github.com/billyvg/Budjet
+
+```
+cd ~/development
+git clone https://github.com/billyvg/Budjet
+```
 
 Create a virtualenv
-    virtualenv --no-site-packages .
-    source bin/activate
 
-Install python library dependencies  
-    pip install -r requirements.txt
+```
+virtualenv --no-site-packages .
+source bin/activate
+```
 
-You should be able to run this app now using  
-    foreman start
+Install python library dependencies
+
+```
+pip install -r requirements.txt
+```
+
+
+You should be able to run this app now using
+
+```
+foreman start
+```
