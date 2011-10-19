@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div id="budget-app" class="container-fluid">
             <div class="sidebar">
                 <div class="well">
                     <h5>Summary</h5>
@@ -49,9 +49,9 @@
             </div>
 
             <div class="content">
-                <ul class="unstyled">
+                <ul id="budget-actions" class="unstyled">
                     <li>
-                      <div class="btn primary">+ Add Item</div>
+                      <div class="add-item btn primary">+ Add Item</div>
                     </li>
                 </ul>
 
@@ -74,8 +74,15 @@
         </div>
 
 
+        <script type="text/javascript">
+            var BJ = window.BJ || {};
+        </script>
         <script type="text/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
+        <script type="text/javascript" src="/static/budjet/js/backbone/models/item.js"></script>
+        <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
         <script type="text/javascript" src="/static/budjet/js/app.js"></script>
     </body>
 </html>
