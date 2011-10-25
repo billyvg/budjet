@@ -1,90 +1,91 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Budjet</title>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/budjet/css/app.css">
-    </head>
+  <head>
+    <title>Budjet</title>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/budjet/css/app.css">
+  </head>
 
 
-    <body>
-        <div class="topbar">
-            <div class="topbar-inner">
-                <div class="container">
-                    <h3>
-                        <a href="/">budjet.app</a>
-                    </h3>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <h3>
+            <a href="/">budjet.app</a>
+          </h3>
 
-                    <ul class="nav">
-                        <li class="active">
-                            <a href="/">Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+          <ul class="nav">
+            <li class="active">
+            <a href="/">Home</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <div id="budget-app" class="container-fluid">
-            <div class="sidebar">
-                <div class="well">
-                    <h5>Summary</h5>
-                    <ul class="unstyled">
-                        <li>
-                            <div class="available-balance">
-                                <span class="income">
-                                    <span class="label success">Available</span>
-                                    $4,000
-                                </span>
-                            </div>
-
-                            <div class="reoccuring-expenses">
-                                <span class="expense">
-                                    <span class="label important">Reoccuring</span>
-                                    $3,000
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+    <div id="budget-app" class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h5>Summary</h5>
+          <ul class="unstyled">
+            <li>
+            <div class="available-balance">
+              <span class="income">
+                <span class="label success">Available</span>
+                $4,000
+              </span>
             </div>
 
-            <div class="content">
-                <ul id="budget-actions" class="unstyled">
-                    <li>
-                      <div class="add-item btn primary">+ Add Item</div>
-                    </li>
-                </ul>
-
-                <h1>Dongs</h1>
-
-                <table class="budget-table zebra-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Description</th>
-                            <th>Reoccuring?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            <div class="reoccuring-expenses">
+              <span class="expense">
+                <span class="label important">Reoccuring</span>
+                $3,000
+              </span>
             </div>
+            </li>
+          </ul>
         </div>
+      </div>
+
+      <div class="content">
+        <h1>Your Expenses and Shit</h1>
+
+        <ul id="budget-actions" class="unstyled">
+          <li>
+          <div class="add-item btn primary">+ Add Item</div>
+          </li>
+        </ul>
 
 
-        <script type="text/javascript">
-            var BJ = window.BJ || {};
-        </script>
-        <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
-        <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
-        <script type="text/javascript" src="/static/budjet/js/backbone/models/item.js"></script>
-        <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
-        <script type="text/javascript" src="/static/budjet/js/app.js"></script>
+        <table class="budget-table zebra-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Amount</th>
+              <th>Description</th>
+              <th>Reoccurs</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      var BJ = window.BJ || {};
+</script>
+<script type="text/javascript"
+  src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
+<script type="text/javascript" src="/static/budjet/js/backbone/models/transaction.js"></script>
+<script type="text/javascript" src="/static/budjet/js/backbone/views/transaction.js"></script>
+<script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
+<script type="text/javascript" src="/static/budjet/js/app.js"></script>
     </body>
-</html>
+  </html>
 
 
