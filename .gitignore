@@ -1,6 +1,7 @@
 bin
 build
 include
+share
 lib
 .Python
 *.pyc
