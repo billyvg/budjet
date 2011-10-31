@@ -8,6 +8,7 @@
 
 
   <body>
+    <div id="fb-root"></div>
     <div class="topbar">
       <div class="topbar-inner">
         <div class="container-fluid">
@@ -20,6 +21,13 @@
             <a href="/">Home</a>
             </li>
           </ul>
+          <div class="user-cp pull-right">
+          {% if fb_user %}
+          Welcome, {{ fb_user['first_name'] }}!
+          {% else %}
+          Logged in as: <div class="fb-login-button">Login with Facebook</div>
+          {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -76,16 +84,37 @@
 
     <script type="text/javascript">
       var BJ = window.BJ || {};
-</script>
-<script type="text/javascript"
-  src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
-<script type="text/javascript" src="/static/budjet/js/backbone/models/transaction.js"></script>
-<script type="text/javascript" src="/static/budjet/js/backbone/views/transaction.js"></script>
-<script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
-<script type="text/javascript" src="/static/budjet/js/app.js"></script>
-    </body>
-  </html>
+    </script>
+    <script type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
+    <script type="text/javascript" src="/static/budjet/js/backbone/models/transaction.js"></script>
+    <script type="text/javascript" src="/static/budjet/js/backbone/views/transaction.js"></script>
+    <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
+    <script type="text/javascript" src="/static/budjet/js/app.js"></script>
+
+    <script type="text/javascript">
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '129263473847954',
+            status     : true, 
+            cookie     : true,
+            xfbml      : true
+          });
+          FB.Event.subscribe('auth.login', function(response) {
+              $.post('/login', { response: response });
+          });
+
+        };
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+    </script>
+  </body>
+</html>
 
 

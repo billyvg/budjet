@@ -1,14 +1,25 @@
 import os, sys
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, session, json
 
+import requests
 from models.transaction import Transaction
+from facebook import get_cookie
 
 app = Flask(__name__)
+if os.environ.get("APP_ENV") != "PROD":
+    app.debug = True
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    fb_user = {}
+    try:
+        fb_cookie = get_cookie(request)
+        r = requests.get('https://graph.facebook.com/me?access_token=%s' % fb_cookie['access_token'])
+        fb_user = json.loads(r.content)
+    except:
+        print sys.exc_info()
+    return render_template("index.html", fb_user=fb_user)
 
 # TODO: refactor this shit into its own python module, don't
 # know the terminology for this for flask.
@@ -64,7 +75,7 @@ def login():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host="0.0.0.0", port=port)
 
 
 
