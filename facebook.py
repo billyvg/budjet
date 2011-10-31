@@ -1,5 +1,4 @@
-from settings import *
-import hashlib
+import os, hashlib
 
 FACEBOOK_APP_ID = os.environ.get("FACEBOOK_APP_ID")
 FACEBOOK_APP_SECRET = os.environ.get("FACEBOOK_APP_SECRET")
@@ -14,5 +13,3 @@ def get_cookie(request):
         return fb_dict
     else:
         raise Exception('Cookie is not valid')
-
-
