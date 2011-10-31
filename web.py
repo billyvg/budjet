@@ -1,6 +1,8 @@
-import os
-from flask import Flask
-from flask import render_template
+import os, sys
+
+from flask import Flask, render_template, jsonify
+
+from models.transaction import Transaction
 
 app = Flask(__name__)
 
@@ -12,24 +14,43 @@ def index():
 # know the terminology for this for flask.
 # Our RESTful API
 
-@app.route("/transaction/add", methods=["POST"])
-def add_transaction():
-    # adds a transaction
+@app.route("/transaction")
+def get_transactions():
+    try:
+        return jsonify(transactions=[i.serialize() for i in Transaction.get()])
+    except:
+        abort(404)
     pass
 
 @app.route("/transaction/<int:trans_id>")
 def get_transaction(trans_id):
     # fetch transaction via id
+    try:
+        t = Transaction.get(trans_id)
+        return jsonify(t.serialize())
+    except:
+        abort(404)
+
+@app.route("/transaction/add", methods=["POST"])
+def add_transaction():
+    t = Transaction(request.form['amount'], request.form['reoccurs'],
+            description=request.form['description'])
+    Transaction.add(t)
+    # adds a transaction
     pass
+
 
 @app.route("/transaction/<int:trans_id>/delete", methods=["DELETE"])
 def delete_transaction(trans_id):
-#deletes a transaction
-    pass
+    #deletes a transaction
+    try:
+        Transaction.delete(trans_id)
+    except:
+        abort(404)
 
 @app.route("/transaction/<int:trans_id>/update", methods=["PUT"])
 def update_transaction(trans_id):
-#updates a transaction
+    #updates a transaction
     pass
 
 
