@@ -23,7 +23,9 @@
           </ul>
           <div class="user-cp pull-right">
           {% if fb_user %}
-          Logged in as: {{ fb_user['first_name'] }}!
+          <div class="logged-in">
+            Logged in as: <span class="user">{{ fb_user['first_name'] }}</span>!
+          </div>
           {% else %}
           <div class="fb-login-button">Login with Facebook</div>
           {% endif %}
