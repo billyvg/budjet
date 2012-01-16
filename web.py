@@ -5,6 +5,8 @@ from models.transaction import Transaction
 import requests
 
 app = Flask(__name__)
+app.config.from_pyfile('settings.py', silent=True)
+
 if os.environ.get("APP_ENV") != "PROD":
     app.debug = True
 
