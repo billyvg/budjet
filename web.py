@@ -1,10 +1,8 @@
 import os, sys
 
 from flask import Flask, request, render_template, jsonify, session, json
-
-import requests
 from models.transaction import Transaction
-from facebook import get_cookie
+import requests
 
 app = Flask(__name__)
 if os.environ.get("APP_ENV") != "PROD":
@@ -14,17 +12,24 @@ if os.environ.get("APP_ENV") != "PROD":
 def index():
     fb_user = {}
     try:
-        fb_cookie = get_cookie(request)
+        fb_cookie = _get_fb_cookie(request)
         r = requests.get('https://graph.facebook.com/me?access_token=%s' % fb_cookie['access_token'])
         fb_user = json.loads(r.content)
+        session['user_id'] = r.content.id
+        session['user_fb_profile'] = r.content
     except:
         print sys.exc_info()
     return render_template("index.html", fb_user=fb_user)
 
+@app.route("/logout")
+def logout():
+    session.pop('user_id', None)
+    session.pop('user_fb_profile', None)
+    return redirect(url_for('index'))
+
 # TODO: refactor this shit into its own python module, don't
 # know the terminology for this for flask.
 # Our RESTful API
-
 @app.route("/transaction")
 def get_transactions():
     try:
@@ -72,6 +77,21 @@ def login():
     else:
         show_login_form()
 
+def _get_fb_cookie(request):
+    try:
+        cookie = request.cookies.get('fbs_%s' % app.config['FACEBOOK_APP_ID'])
+        fb_dict = dict(item.split('=') for item in cookie.split('&'))
+        cookie_sig = fb_dict['sig']
+        del fb_dict['sig']
+
+        if hashlib.md5(''.join(
+            ['%s=%s' % (k, v) for k, v in sorted(fb_dict.iteritems())]
+            ) + app.config['FACEBOOK_APP_SECRET']).hexdigest() == cookie_sig:
+            return fb_dict
+        else:
+            raise Exception('Cookie is not valid')
+    except:
+        raise Exception('Cookie not found')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
