@@ -23,6 +23,10 @@ def index():
         print sys.exc_info()
     return render_template("index.html", fb_user=fb_user)
 
+@app.route("/jasmine")
+def jasmine_test():
+    return render_template("tests/jasmine.html")
+
 @app.route("/logout")
 def logout():
     session.pop('user_id', None)
