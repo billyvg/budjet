@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Budjet</title>
-    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/static/budjet/css/app.css">
   </head>
 
@@ -22,13 +22,13 @@
             </li>
           </ul>
           <div class="user-cp pull-right">
-          {% if fb_user %}
-          <div class="logged-in">
-            Logged in as: <span class="user">{{ fb_user['first_name'] }}</span>!
-          </div>
-          {% else %}
-          <div class="fb-login-button">Login with Facebook</div>
-          {% endif %}
+            {% if fb_user %}
+            <div class="logged-in">
+              Logged in as: <span class="user">{{ fb_user['first_name'] }}</span>!
+            </div>
+            {% else %}
+            <div class="fb-login-button">Login with Facebook</div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -63,59 +63,79 @@
 
         <ul id="budget-actions" class="unstyled">
           <li>
-          <div class="add-item btn primary">+ Add Item</div>
+            <script type="text/x-handlebars">
+              {% raw %}
+              {{#view Em.Button
+                classNames="btn primary"
+                target="BJ.transactionsController"
+                action="addTransaction"}}
+                Add Item
+              {{/view}}
+              {% endraw %}
+            </script>
           </li>
         </ul>
 
 
+        <script type="text/x-handlebars">
+        {% raw %}
         <table class="budget-table zebra-striped">
           <thead>
             <tr>
               <th>#</th>
+              <th>Date</th>
               <th>Amount</th>
               <th>Description</th>
               <th>Reoccurs</th>
             </tr>
           </thead>
           <tbody>
-          </tbody>
+          {{#each BJ.transactionsController}}
+            {{#view BJ.TransactionView contentBinding="this" tagName="tr"}}
+              <td>{{content.id}}</td>
+              <td>{{content.date}}</td>
+              <td>{{content.amount}}</td>
+              <td>{{content.description}}</td>
+              <td>{{content.reoccuring}}</td>
+            {{/view}}
+          {{/each}}
+          </body>
         </table>
+        {% endraw %}
+        </script>
       </div>
     </div>
 
-
-    <script type="text/javascript">
-      var BJ = window.BJ || {};
-    </script>
     <script type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
+    <script type="text/javascript" src="/static/libs/ember/ember.min.js"></script>
+    <script type="text/javascript" src="/static/libs/ember/ember-data.min.js"></script>
+
+    <script type="text/javascript" src="/static/budjet/js/app.js"></script>
     <script type="text/javascript" src="/static/budjet/js/backbone/models/transaction.js"></script>
     <script type="text/javascript" src="/static/budjet/js/backbone/views/transaction.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/app.js"></script>
 
     <script type="text/javascript">
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '129263473847954',
-            status     : true, 
-            cookie     : true,
-            xfbml      : true
-          });
-          FB.Event.subscribe('auth.login', function(response) {
-              $.post('/login', { response: response });
-          });
-
-        };
-        (function(d){
-           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-           js = d.createElement('script'); js.id = id; js.async = true;
-           js.src = "//connect.facebook.net/en_US/all.js";
-           d.getElementsByTagName('head')[0].appendChild(js);
-         }(document));
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '129263473847954',
+          status     : true, 
+          cookie     : true,
+          xfbml      : true
+        });
+        FB.Event.subscribe('auth.login', function(response) {
+          $.post('/login', { response: response });
+        });
+      };
+      (function(d){
+         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         d.getElementsByTagName('head')[0].appendChild(js);
+       }(document));
     </script>
+
   </body>
 </html>
 
