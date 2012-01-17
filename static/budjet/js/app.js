@@ -5,15 +5,19 @@ BJ = Ember.Application.create();
 BJ.Transaction = Em.Object.extend({
   amount: 0,
   description: '',
-  type: '',
   reoccuring: false,
 
-  relative: function() {
-    if (this.get('type') == 'expense') {
-      return this.get('amount')*-1;
+  type: function() {
+    if (this.get('amount') > 0) {
+      return 'income';
     }
-    return this.get('amount');
-  }.property('type', 'amount')
+    else if (this.get('amount') < 0) {
+      return 'expense';
+    }
+    else {
+      return '';
+    }
+  }.property('amount')
 });
 
 // Views
@@ -32,15 +36,8 @@ BJ.transactionsController = Em.ArrayProxy.create({
   // Array of Transaction objects
   content: [],
 
-  addTransaction: function() {
-    var t = BJ.Transaction.create({
-      id: 123,
-      date: 'today',
-      amount: 200,
-      description: 'test',
-      reoccuring: false,
-      type: 'expense'
-    });
+  addTransaction: function(transaction) {
+    var t = BJ.Transaction.create(transaction);
     this.pushObject(t);
   },
 
@@ -51,14 +48,19 @@ BJ.transactionsController = Em.ArrayProxy.create({
         id: i,
         amount: 100+i,
         description: 'test',
-        type: 'expense'
       });
       this.pushObject(t);
     }
+  },
+
+  totalAssets: function() {
+    return _.reduce(this.content, function(memo, obj) {
+      return memo + obj.get('amount');
+    }, 0);
   }
 });
 
 
-$(function() {
-  BJ.transactionsController.loadTransactions();
-});
+//$(function() {
+//  BJ.transactionsController.loadTransactions();
+//});
