@@ -50,11 +50,7 @@ describe('Tests for transactionsController', function() {
 
   beforeEach(function() {
     this.controller = BJ.transactionsController;
-    this.controller.forEach(this.controller.removeObject, this.controller);
-    this.controller.forEach(this.controller.removeObject, this.controller);
-    this.controller.forEach(this.controller.removeObject, this.controller);
-    this.controller.forEach(this.controller.removeObject, this.controller);
-    this.controller.forEach(this.controller.removeObject, this.controller);
+    this.controller.set('content', []);
   });
 
 
