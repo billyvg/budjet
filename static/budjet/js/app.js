@@ -1,33 +1,6 @@
 BJ = Ember.Namespace.create();
 BJ = Ember.Application.create();
 
-// Models
-BJ.Transaction = Em.Object.extend({
-  amount: 0,
-  description: '',
-  reoccuring: false,
-
-  type: function() {
-    if (this.get('amount') > 0) {
-      return 'income';
-    }
-    else if (this.get('amount') < 0) {
-      return 'expense';
-    }
-    else {
-      return '';
-    }
-  }.property('amount')
-});
-
-// Views
-BJ.TransactionView = Em.View.extend({
-});
-
-BJ.ActionsView = Em.View.extend({
-});
-
-
 /**
  * Controllers
  */
@@ -61,6 +34,11 @@ BJ.transactionsController = Em.ArrayProxy.create({
 });
 
 
-//$(function() {
-//  BJ.transactionsController.loadTransactions();
-//});
+BJ.ActionsView = Em.View.extend({
+
+});
+
+
+$(function() {
+  BJ.transactionsController.loadTransactions();
+});
