@@ -1,5 +1,5 @@
-jQuery ->
-  class ActionView extends Backbone.View
+namespace 'BJ', (exports) ->
+  class exports.ActionView extends Backbone.View
     el: '#budget-actions'
 
     events: ->
@@ -9,22 +9,22 @@ jQuery ->
       this.App = this.options.parent
 
     add: ->
-      this.App.Transactions.add new BJ.TransactionModel
+      this.App.Transactions.add new exports.TransactionModel
 
     render: ->
       ''
 
 
-  class BJ.AppView extends Backbone.View
+  class exports.AppView extends Backbone.View
     el: '#budjet-app'
 
     initialize: ->
-      @Action = new BJ.ActionView -> parent: @
-      @Transactions = new BJ.TransactionCollection
+      @Action = new exports.ActionView -> parent: @
+      @Transactions = new exports.TransactionCollection
       @Transactions.bind 'add', @add, @
 
     add: (row) ->
-      view = new BJ.TransactionView {model: row}
+      view = new exports.TransactionView {model: row}
       $('.budget-table tbody').append view.render
 
     render: ->

@@ -1,47 +1,74 @@
-$(function() {
+(function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
+  namespace('BJ', function(exports) {
+    exports.ActionView = (function(_super) {
 
-  BJ.ActionView = Backbone.View.extend({
-    el: $('#budget-actions')
+      __extends(ActionView, _super);
 
-  , events: {
-      'click .add-item':      'add'
-    }
+      function ActionView() {
+        ActionView.__super__.constructor.apply(this, arguments);
+      }
 
-  , initialize: function() {
-      this.App = this.options.parent
-    }
+      ActionView.prototype.el = '#budget-actions';
 
-  , add: function() {
-      this.App.Transactions.add(new BJ.TransactionModel);
-    }
+      ActionView.prototype.events = function() {
+        return {
+          'click .add-item': 'add'
+        };
+      };
 
-  , render: function() {
+      ActionView.prototype.initialize = function() {
+        return this.App = this.options.parent;
+      };
 
-    }
+      ActionView.prototype.add = function() {
+        return this.App.Transactions.add(new exports.TransactionModel);
+      };
 
-  })
+      ActionView.prototype.render = function() {
+        return '';
+      };
 
+      return ActionView;
 
-  BJ.AppView = Backbone.View.extend({
-    el: $('#budjet-app')
+    })(Backbone.View);
+    return exports.AppView = (function(_super) {
 
-  , initialize: function() {
-      this.Action = new BJ.ActionView({parent: this})
-      this.Transactions = new BJ.TransactionCollection()
-      this.Transactions.bind('add', this.add, this)
-    }
+      __extends(AppView, _super);
 
-  , add: function(row) {
-      var view = new BJ.TransactionView({model: row})
-      $('.budget-table tbody').append(view.render())
-    }
+      function AppView() {
+        AppView.__super__.constructor.apply(this, arguments);
+      }
 
-  , render: function() {
+      AppView.prototype.el = '#budjet-app';
 
+      AppView.prototype.initialize = function() {
+        this.Action = new exports.ActionView(function() {
+          return {
+            parent: this
+          };
+        });
+        this.Transactions = new exports.TransactionCollection;
+        return this.Transactions.bind('add', this.add, this);
+      };
 
-    }
-  })
+      AppView.prototype.add = function(row) {
+        var view;
+        view = new exports.TransactionView({
+          model: row
+        });
+        return $('.budget-table tbody').append(view.render);
+      };
 
-});
+      AppView.prototype.render = function() {
+        return '';
+      };
 
+      return AppView;
+
+    })(Backbone.View);
+  });
+
+}).call(this);

@@ -1,20 +1,23 @@
-jQuery ->
-  class TransactionModel extends Backbone.Model
+namespace 'BJ', (exports) ->
+  class exports.Transaction extends Backbone.Model
     defaults:
       amount: 0
       description: ''
-      type: ''
       reoccuring: false
 
-    ###
-    Retrieve the relative value of the transaction (i.e.
-    negative for an expense, and positive for income).
-    ###
-    relative: ->
-      if @get('type') == 'expense'
-        return @get('amount')*-1
+    type: () ->
+      return '' if @get('amount') is 0
+      if @get('amount') > 0 then 'income' else 'expense'
 
-      @get('amount')
+  class exports.Transactions extends Backbone.Collection
+    model: exports.Transaction
 
-  class TransactionCollection extends Backbone.Collection
-    model: BJ.TransactionModel
+    total: () ->
+      @reduce (memo, transaction) ->
+        memo + transaction.get 'amount'
+      , 0
+
+    reoccurringTotal: (period) ->
+      ''
+
+
