@@ -1,122 +1,79 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Budjet</title>
-    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/budjet/css/app.css">
-  </head>
+{% extends "base.html" %}
 
+{% block title %}Budjet{% endblock %}
 
-  <body>
-    <div id="fb-root"></div>
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="container-fluid">
-          <h3>
-            <a href="/">budjet.app</a>
-          </h3>
+{% block content %}
+  <div id="fb-root"></div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="/">budjet.app</a>
 
-          <ul class="nav">
-            <li class="active">
-            <a href="/">Home</a>
-            </li>
-          </ul>
-          <div class="user-cp pull-right">
-          {% if fb_user %}
-          <div class="logged-in">
-            Logged in as: <span class="user">{{ fb_user['first_name'] }}</span>!
-          </div>
-          {% else %}
-          <div class="fb-login-button">Login with Facebook</div>
-          {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="budget-app" class="container-fluid">
-      <div class="sidebar">
-        <div class="well">
-          <h5>Summary</h5>
-          <ul class="unstyled">
-            <li>
-            <div class="available-balance">
-              <span class="income">
-                <span class="label success">Available</span>
-                $4,000
-              </span>
-            </div>
-
-            <div class="reoccuring-expenses">
-              <span class="expense">
-                <span class="label important">Reoccuring</span>
-                $3,000
-              </span>
-            </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="content">
-        <h1>Your Expenses and Shit</h1>
-
-        <ul id="budget-actions" class="unstyled">
-          <li>
-          <div class="add-item btn primary">+ Add Item</div>
+        <ul class="nav">
+          <li class="active">
+          <a href="/">Home</a>
           </li>
         </ul>
+        <div class="user-cp pull-right">
+        {% if fb_user %}
+        <div class="logged-in">
+          Logged in as: <span class="user">{{ fb_user['first_name'] }}</span>!
+        </div>
+        {% else %}
+        <div class="fb-login-button">Login with Facebook</div>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div id="budget-app" class="container-fluid">
+    <div class="sidebar span3">
+      <div class="well">
+        <h5>Summary</h5>
+        <ul class="unstyled">
+          <li>
+          <div class="available-balance">
+            <span class="income">
+              <span class="label label-success">Available</span>
+              $4,000
+            </span>
+          </div>
 
-        <table class="budget-table zebra-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Amount</th>
-              <th>Description</th>
-              <th>Reoccurs</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+          <div class="reoccuring-expenses">
+            <span class="expense">
+              <span class="label label-important">Reoccuring</span>
+              $3,000
+            </span>
+          </div>
+          </li>
+        </ul>
       </div>
     </div>
 
+    <div class="content span9">
+      <h1>Your Expenses and Shit</h1>
 
-    <script type="text/javascript">
-      var BJ = window.BJ || {};
-    </script>
-    <script type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/backbone/models/transaction.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/backbone/views/transaction.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
-    <script type="text/javascript" src="/static/budjet/js/app.js"></script>
-
-    <script type="text/javascript">
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '129263473847954',
-            status     : true, 
-            cookie     : true,
-            xfbml      : true
-          });
-          FB.Event.subscribe('auth.login', function(response) {
-              $.post('/login', { response: response });
-          });
-
-        };
-        (function(d){
-           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-           js = d.createElement('script'); js.id = id; js.async = true;
-           js.src = "//connect.facebook.net/en_US/all.js";
-           d.getElementsByTagName('head')[0].appendChild(js);
-         }(document));
-    </script>
-  </body>
-</html>
+      <ul id="budget-actions" class="unstyled">
+        <li>
+        <div class="add-item btn btn-primary">+ Add Item</div>
+        </li>
+      </ul>
 
 
+      <table class="budget-table table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Reoccurs</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

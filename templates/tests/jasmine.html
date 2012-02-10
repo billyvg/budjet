@@ -1,20 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-  <title>Jasmine Spec Runner</title>
+{% extends "base.html" %}
 
+{% block title %}Jasmine Spec Runner{% endblock %}
+{% block headcss %}
   <link rel="shortcut icon" type="image/png" href="/static/libs/jasmine/jasmine_favicon.png">
-
   <link rel="stylesheet" type="text/css" href="/static/libs/jasmine/jasmine.css">
+{% endblock %}
+
+
+{% block footerjs %}
   <script type="text/javascript" src="/static/libs/jasmine/jasmine.js"></script>
   <script type="text/javascript" src="/static/libs/jasmine/jasmine-html.js"></script>
 
-  <!-- include source files here... -->
-  <script type="text/javascript"
-    src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
-  <script type="text/javascript" src="/static/budjet/js/app.js"></script>
+  {{ super() }}
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="/static/tests/spec/app.js"></script>
@@ -48,9 +45,6 @@
 
     })();
   </script>
+{% endblock %}
 
 </head>
-
-<body>
-</body>
-</html>
