@@ -14,7 +14,7 @@
       Transaction.prototype.defaults = {
         amount: 0,
         description: '',
-        reoccuring: false
+        recurring: false
       };
 
       Transaction.prototype.type = function() {
@@ -39,13 +39,41 @@
 
       Transactions.prototype.model = exports.Transaction;
 
-      Transactions.prototype.total = function() {
-        return this.reduce(function(memo, transaction) {
-          return memo + transaction.get('amount');
+      Transactions.prototype.total = function(coll) {
+        if (coll == null) coll = this.models;
+        return _.reduce(coll, function(memo, transaction) {
+          return memo + Number(transaction.get('amount'));
         }, 0);
       };
 
-      Transactions.prototype.reoccurringTotal = function(period) {
+      Transactions.prototype.recurringTotal = function() {
+        var recurring;
+        recurring = this.filter(function(transaction) {
+          return transaction.get('recurring');
+        });
+        return this.total(recurring);
+      };
+
+      Transactions.prototype.nonrecurringTotal = function() {
+        var recurring;
+        recurring = this.filter(function(transaction) {
+          return !transaction.get('recurring');
+        });
+        return this.total(recurring);
+      };
+
+      Transactions.prototype.totalBalance = function(startDate, endDate) {
+        var transactions;
+        transactions = this.filter(function(transaction) {
+          var date;
+          date = transaction.get('date');
+          return date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0;
+        });
+        console.log(transactions);
+        return this.total(transactions);
+      };
+
+      Transactions.prototype.estimatedBalance = function(startDate, endDate) {
         return '';
       };
 
