@@ -54,9 +54,6 @@ h2 {
 #work-experience .description-container li {
   margin-bottom: 0;
 }
-#work-experience h4 {
-  margin-top: 6px;
-}
 .description-container .role {
   margin-bottom: 0;
 }
@@ -79,6 +76,13 @@ h2 {
 }
 .lib-list {
   font-weight: bold;
+}
+
+#projects h3 {
+  line-height: 22px;
+}
+.project-description {
+  margin-bottom: 0;
 }
 .project-url {
   color: rgba(0, 0, 0, 0.3);
