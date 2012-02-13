@@ -74,8 +74,9 @@ h2 {
 .description-container p {
   margin-bottom: 12px;
 }
-.lib-list {
+.description-container .lib-list {
   font-weight: bold;
+  margin-bottom: 0;
 }
 
 #projects h3 {
