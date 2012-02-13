@@ -1,3 +1,7 @@
+p {
+  font-size: 14px;
+  line-height: 20px;
+}
 header {
   border-bottom: 1px solid #000;
   margin-bottom: 12px;
@@ -39,7 +43,7 @@ h2 {
 }
 
 
-#work-experience > ul > li, #projects ul > li {
+#work-experience > ul > li, #projects ul > li, #education ul > li {
   /*border-right: 6px solid rgba(0, 136, 204, 0.4);*/
   margin: 0 18px 12px 18px;
   padding-right: 12px;
@@ -49,10 +53,12 @@ h2 {
 }
 #work-experience .description-container li {
   margin-bottom: 0;
-  border-right
 }
 #work-experience h4 {
   margin-top: 6px;
+}
+.description-container .role {
+  margin-bottom: 0;
 }
 .role:before {
   content: "Role: ";
@@ -69,7 +75,7 @@ h2 {
   border-bottom-left-radius: 4px;
 }
 .description-container p {
-  margin: 0;
+  margin-bottom: 12px;
 }
 .lib-list {
   font-weight: bold;
@@ -77,4 +83,12 @@ h2 {
 .project-url {
   color: rgba(0, 0, 0, 0.3);
   font-size: 12px;
+}
+
+.high {
+  font-size: 18px;
+  font-weight: bold;
+}
+.medium {
+  font-size: 15px;
 }
