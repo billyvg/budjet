@@ -1,0 +1,71 @@
+header {
+  border-bottom: 1px solid #000;
+  margin-bottom: 12px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+header .me {
+  overflow: hidden;
+}
+header .contact {
+  float: right;
+}
+header .contact p {
+  margin: 0;
+}
+
+h2 {
+  line-height: 24px;
+  margin-top: 18px;
+}
+
+.job-title {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.timeframe {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  float: right;
+}
+
+
+#work-experience > ul > li, #projects ul > li {
+  /*border-right: 6px solid rgba(0, 136, 204, 0.4);*/
+  margin: 0 18px 12px 18px;
+  padding-right: 12px;
+}
+#work-experience li:nth-child(even), #projects li:nth-child(even) {
+  border-color: rgba(0, 136, 204, 0.8);
+}
+#work-experience .description-container li {
+  margin-bottom: 0;
+  border-right
+}
+#work-experience h4 {
+  margin-top: 6px;
+}
+.role:before {
+  content: "Role: ";
+  font-weight: bold;
+}
+
+.description-container {
+  border-left: 1px solid rgba(150, 150, 150, 0.6);
+  margin-left: 24px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.description-container p {
+  margin: 0;
+}
+.lib-list {
+  font-weight: bold;
+}
+.project-url {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+}

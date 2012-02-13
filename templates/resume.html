@@ -7,152 +7,217 @@
   </head>
 
   <body>
-    <header>
-      <h1>
+    <div class="container">
+      <header>
         <div class="vcard">
-          <p class="fn">Billy Vong</p>
-          <p class="adr">
-            <span class="locality">San Francisco, <span class="region">CA</span>
-          </p>
-          <p class="tel">(847) 636-2442</p>
-          <p class="email">
-            <a href="mailto:billyvg@gmail.com">billyvg@gmail.com</a>
-          </p>
+          <div class="contact">
+            <p class="email">
+              <a href="mailto:billyvg@gmail.com">billyvg@gmail.com</a>
+            </p>
+            <p class="github">
+              <a href="http://github.com/billyvg">github: billyvg</a>
+            </p>
+            <p class="tel">(847) 636-2442</p>
+          </div>
+          <div clss="me">
+            <h1 class="fn">Billy Vong</h1>
+            <p class="adr">
+              <span class="locality">San Francisco, <span class="region">CA</span>
+            </p>
+          </div>
         </div>
-      </h1>
-    </header>
+      </header>
 
-    <section id="work-experience">
-      <h2>Work Experience</h2>
-      <ul>
-        <li>
-          <h3>
-            <a href="http://www.focus.com">Focus.com</a>, <span class="job-title">Frontend Engineer</span>
-            <span class"timeframe">2011-current</span>
-          </h3>
-          <section class="work-description">
-            <p>
-              Developed the frontend of an online conference platform allowing
-              users to listen to panelists while chatting with other listeners,
-              voting on the content they hear, and voting on questions for
-              panelists   Used <strong>Backbone.js</strong>,
-                <strong>jQuery</strong>,
-            </p>
-            <p>
-              Rewrote the site's frontend improving items such as: inline
-              and repeated CSS, reduced image usage and used CSS image
-              sprites where applicable, rewrote JavaScript to be cleaner
-              and more reusable, used Twitter's <strong>Bootstrap
-                CSS</strong>.
-            </p>
-          </section>
-        </li>
-        <li>
-          <h3>
-            <a href="http://www.quinstreet.com">QuinStreet, Inc.</a>,
-            <span class="job-title">Web Developer</span>
-            <span class"timeframe">2011-current</span>
-          </h3>
-          <section class="work-description">
-            <p>
-              Migrated large, content-rich sites to our proprietary platform.
-              Used <strong>CodeIgniter</strong> (PHP) for the frontend, and an
-              API to communicate and query the backend.  Re-built sites
-              (frontend and backend), such as <a
-                href="http://www.webopedia.com">webopedia.com</a> and <a
-                href="http://www.htmlgoodies.com">HTMLGoodies.com</a>
-            </p>
-          </section>
-        </li>
-        <li>
-          <h3>
-            Midnite Videos,
-            <span class="job-title">Software Engineer</span>
-            <span class"timeframe">2008-2008</span>
-          </h3>
-          <section class="work-description">
-            <p>
-              Created an MVC framework in PHP, used to re-implement the site,
-              with MySQL as the database, and jQuery on the frontend.
-            </p>
-          </section>
-        </li>
-      </ul>
-    </section>
+      <section id="work-experience">
+        <h2>Work Experience</h2>
+        <ul class="unstyled">
+          <li>
+            <h3>
+              <a href="http://www.focus.com">Focus.com</a>, <span class="job-title">Frontend Engineer</span>
+              <span class="timeframe">2011-present</span>
+            </h3>
+            <section class="description-container">
+              <h4>
+                Online conference platform
+              </h4>
+              <p class="work-description">
+                A realtime conference system that users were able to attend and
+                listen in to panelists speak about a particular topic. Some
+                actions that the user could do are:
+                <ul>
+                  <li>
+                    Listen to panelists while chatting with other listeners.
+                  </li>
+                  <li>
+                    Vote positive/negative on the content they hear.
+                  </li>
+                  <li>
+                    Vote up/down questions that they want panelists to answer.
+                  </li>
+                </ul>
+              </p>
+              <p class="role">
+                Developed the frontend, minor fixes on the backend
+                (Node + django).
+              </p>
+              <p class="lib-list">
+                Backbone.js, jQuery, Node.JS, django, RabbitMQ
+              </p>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <h3>
-            <a href="http://github.com/billyvg/ppbot">ppbot</a>
-            <span class="timeframe">2009-current</span>
-          </h3>
-          <section class="project-description">
-            <p>
-              A python IRC bot that started off as a school project, but became
-              something to hack on while learning python.
+              <h4>
+                Site Rewrite
+              </h4>
+              <p class="work-description">
+                The previous version of the site suffered from many
+                inefficient and poor frontend practices including inline CSS,
+                invalid HTML, unscalable JS.
+              </p>
+              <p class="role">
+                Rewrote the site's entire frontend.  Reduced image usage, used
+                CSS image sprites where possible, rewrote JS to be more
+                reusable, reduced the frontend code by a significant amount
+                and also reduced the frontend loading times.
+              </p>
+              <p class="lib-list">
+                jQuery, Twitter Bootstrap, SASS/SCSS, django
+              </p>
+            </section>
+          </li>
+          <li>
+            <h3>
+              <a href="http://www.quinstreet.com">QuinStreet, Inc.</a>,
+              <span class="job-title">Web Developer</span>
+              <span class="timeframe">2010-2011</span>
+            </h3>
+            <section class="description-container">
+              <p class="work-description">
+                Migrated large, content-rich sites to our proprietary platform.
+              </p>
+              <p class="role">
+                Rebuilt entire sites including rewriting the frontend following
+                PSD templates, and rewriting the backend using our API to
+                communicate and query our content database.
+              </p>
+              <p class="lib-list">
+                CodeIgniter, jQuery
+              </p>
+            </section>
+          </li>
+          <li>
+            <h3>
+              Midnite Videos,
+              <span class="job-title">Web Developer</span>
+              <span class="timeframe">2008-2009</span>
+            </h3>
+            <section class="description-container">
+              <p>
+                Created an MVC framework in PHP, used to re-implement the site,
+                with MySQL as the database, and jQuery on the frontend.
+              </p>
+            </section>
+          </li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <ul class="unstyled">
+          <li>
+            <h3>
+              <a href="http://github.com/billyvg/ppbot">ppbot</a>
+              <span class="project-url">
+                http://github.com/billyvg/ppbot
+              </span>
+              <span class="timeframe">2009-present</span>
+            </h3>
+            <p class="project-description">
+                A python IRC bot.
             </p>
-            <p class="project-url">
-              http://github.com/billyvg/ppbot
-            </p>
-          </section>
-        </li>
-        <li>
-          <h3>
-            <a href="http://github.com/billyvg/budjet">budjet</a>
-            <span class="timeframe">2011-current</span>
-          </h3>
-          <section class="project-description">
-            <p>
+            <section class="description-container">
+              <p class="role">
+                Began as a solo school project, but eventually turned into
+                something to hack on while learning python and python libraries.
+              </p>
+              <p class="lib-list">
+                python, SQLAlchemy, postgresql
+              </p>
+            </section>
+          </li>
+          <li>
+            <h3>
+              <a href="http://github.com/billyvg/budjet">budjet</a>
+              <span class="project-url">
+                http://github.com/billyvg/budjet
+              </span>
+              <span class="timeframe">2011-present</span>
+            </h3>
+            <p class="project-description">
               A budgetting web application (incomplete) which provides an
-              easy estimate of your finances. Uses
-              <strong>Backbone.js</strong>, <strong>jQuery</strong>,
-              <strong>CoffeeScript</strong>, <strong>Flask</strong>,
-              <strong>Heroku</strong>
+              easy estimate of your finances. 
             </p>
-            <p class="project-url">
-              http://github.com/billyvg/budjet
-            </p>
-          </section>
-        </li>
-        <li>
-          <h3>
-            <a href="http://www.moodydb.com">MoodyDB</a>
-            <span class="timeframe">2008</span>
-          </h3>
-          <section class="project-description">
-            <p>
+            <section class="description-container">
+              <p class="role">
+                Personal side project to help me keep up to date on different web
+                toys^H^H^Hechnologies.
+              <p class ="lib-list">
+                Backbone.js, jQuery, jasmine, CoffeeScript, Flask, Heroku
+              </p>
+            </section>
+          </li>
+          <li>
+            <h3>
+              <a href="http://www.moodydb.com">MoodyDB</a>
+              <span class="project-url">
+                http://www.moodydb.com
+              </span>
+              <span class="timeframe">2008</span>
+            </h3>
+            <p class="project-description">
               Allows user to upload music and attempts to classify music based
               on the "mood" of the song rather than the genre.
             </p>
-            <p>
-              Developed the website using <strong>CodeIgniter</strong (PHP) and
-                MySQL.  Assisted with the frontend development using jQuery.
-            </p>
-            <p class="project-url">
-              http://www.moodydb.com
-            </p>
-          </section>
-        </li>
-      </ul>
-    </section>
+            <section class="description-container">
+              <p class="role">
+                Worked with a classmate to develop the site.  Mainly worked on
+                the backend using PHP, while classmate did the frontend using
+                YUI and jQuery.
+              </p>
+              <p class="lib-list">
+                CodeIgniter, MySQL, jQuery
+              </p>
+            </section>
+          </li>
+        </ul>
+      </section>
 
-    <section id="skills">
-      <h2>
-        <strike>Buzzwords</strike> Skills
-      </h2>
-      <p>
-      <span class="high">git, vim, OSX</span>
-      <span class="high">JavaScript, jQuery</span>,
-      <span class="medium">Backbone.js, CoffeeScript</span>,
-      <span class="high">HTML5/CSS</span>,
-      <span class="medium">Bootstrap, compass, sass/scss</span>,
-      <span class="high">php, python</span>
-      <span class="medium">django, flask, SQLAlchemy</span>,
-      <span class="low">mysql, pgsql</span>,
-      </p>
-    </section>
+      <section id="skills">
+        <h2>
+          <strike>Buzzwords</strike> Skills
+        </h2>
+        <p>
+        <span class="high">git, vim, OSX</span>
+        <span class="high">JavaScript, jQuery</span>,
+        <span class="medium">Backbone.js, CoffeeScript</span>,
+        <span class="high">HTML5/CSS</span>,
+        <span class="medium">Bootstrap, compass, sass/scss</span>,
+        <span class="high">php, python</span>
+        <span class="medium">django, flask, SQLAlchemy</span>,
+        <span class="low">mysql, pgsql</span>,
+        </p>
+      </section>
+
+      <section id="education">
+        <h2>
+          Education
+        </h2>
+        <p>
+          University of Illinois at Champaign-Urbana, BA in Computer Engineering,
+          2009
+        </p>
+      </section>
+
+    </div>
+
     <script type="text/javascript" src="/static/libs/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
   </body>
