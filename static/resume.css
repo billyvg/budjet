@@ -28,6 +28,7 @@ h1 {
   line-height: 48px;
 }
 h2 {
+  font-family: 'Cuprum', Helvetica, Arial;
   line-height: 24px;
   margin-top: 18px;
 }
@@ -71,6 +72,14 @@ h2 {
   -webkit-border-bottom-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
+.description-container h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.description-container h4:first-child {
+  margin-top: 0;
+}
 .description-container p {
   margin-bottom: 12px;
 }
@@ -95,5 +104,8 @@ h2 {
   font-weight: bold;
 }
 .medium {
-  font-size: 15px;
+  font-size: 16px;
+}
+.low {
+  font-size: 12px;
 }
