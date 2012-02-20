@@ -46,12 +46,12 @@ namespace 'BJ', (exports) ->
 
     it 'Add a new transaction with non-default values to collection ', () ->
       trans =
-        date: ''
+        date: new Date(2012, 1, 10)
         amount: 100
         description: 'test'
         recurring: true
 
-      expect(@transactions.models.lenth).toBe undefined
+      expect(@transactions.models.length).toBe 0
       @transactions.add trans
       expect(@transactions.models.length).toBe 1
 
@@ -116,16 +116,41 @@ namespace 'BJ', (exports) ->
       }
 
     it 'Calculate the total amount of recurring transactions.', () ->
-      expect(@transactions.recurringTotal()).toBe (100-30+22-14+59+49)
+      expect(
+        @transactions.recurringTotal()
+      ).toBe (100-30+22-14+59+49)
 
     it 'Calculate the total amount of non-recurring transactions.', () ->
-      expect(@transactions.nonrecurringTotal()).toBe (10+123)
+      expect(
+        @transactions.nonrecurringTotal()
+      ).toBe (10+123)
 
-    it 'Calculate the net balance of transactions in a certain time period.', () ->
-      expect(@transactions.totalBalance(new Date(2012, 1, 1), new Date(2012, 2, 1))).toBe (100-30+22-14+59+10)
+    it 'Sum of transactions before 2-3-2012', () ->
+      expect(
+        @transactions.totalBalance('', new Date(2012, 2, 3))
+      ).toBe (100-30+22-14+59+10+123)
+
+    it 'Sum of transactions after 1-21-2012', () ->
+      expect(
+        @transactions.totalBalance(new Date(2012, 1, 21), '')
+      ).toBe (59+49+123)
+
+    it 'Sum of transactions between 1-1-2012 and 2-1-2012.', () ->
+      expect(
+        @transactions.totalBalance(new Date(2012, 1, 1), new Date(2012, 2, 1))
+      ).toBe (100-30+22-14+59+10)
+
+    it 'Sum of transactions between 1-11-2012 and 1-21-2012.', () ->
+      expect(
+        @transactions.totalBalance(new Date(2012, 1, 11), new Date(2012, 1, 21))
+      ).toBe (22-14+59)
 
     it 'Calculate the available money in a certain time period.', () ->
-      expect('').toBe false
+      expect(
+        @transactions.estimatedBalance(
+          new Date(2012, 1, 1), new Date(2012, 2, 1)
+        )
+      ).toBe false
 
   describe 'Tests of the Summary View', () ->
     beforeEach () ->

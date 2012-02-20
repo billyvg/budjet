@@ -52,12 +52,12 @@
       it('Add a new transaction with non-default values to collection ', function() {
         var content, trans;
         trans = {
-          date: '',
+          date: new Date(2012, 1, 10),
           amount: 100,
           description: 'test',
           recurring: true
         };
-        expect(this.transactions.models.lenth).toBe(void 0);
+        expect(this.transactions.models.length).toBe(0);
         this.transactions.add(trans);
         expect(this.transactions.models.length).toBe(1);
         content = this.transactions.models[0];
@@ -133,11 +133,20 @@
       it('Calculate the total amount of non-recurring transactions.', function() {
         return expect(this.transactions.nonrecurringTotal()).toBe(10 + 123);
       });
-      it('Calculate the net balance of transactions in a certain time period.', function() {
+      it('Sum of transactions before 2-3-2012', function() {
+        return expect(this.transactions.totalBalance('', new Date(2012, 2, 3))).toBe(100 - 30 + 22 - 14 + 59 + 10 + 123);
+      });
+      it('Sum of transactions after 1-21-2012', function() {
+        return expect(this.transactions.totalBalance(new Date(2012, 1, 21), '')).toBe(59 + 49 + 123);
+      });
+      it('Sum of transactions between 1-1-2012 and 2-1-2012.', function() {
         return expect(this.transactions.totalBalance(new Date(2012, 1, 1), new Date(2012, 2, 1))).toBe(100 - 30 + 22 - 14 + 59 + 10);
       });
+      it('Sum of transactions between 1-11-2012 and 1-21-2012.', function() {
+        return expect(this.transactions.totalBalance(new Date(2012, 1, 11), new Date(2012, 1, 21))).toBe(22 - 14 + 59);
+      });
       return it('Calculate the available money in a certain time period.', function() {
-        return expect('').toBe(false);
+        return expect(this.transactions.estimatedBalance(new Date(2012, 1, 1), new Date(2012, 2, 1))).toBe(false);
       });
     });
     return describe('Tests of the Summary View', function() {
