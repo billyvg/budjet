@@ -20,11 +20,11 @@
       };
 
       ActionView.prototype.initialize = function() {
-        return this.App = this.options.parent;
+        return this.app = this.options.parent;
       };
 
       ActionView.prototype.add = function() {
-        return this.App.Transactions.add(new exports.TransactionModel);
+        return this.app.transactions.add(new exports.Transaction);
       };
 
       ActionView.prototype.render = function() {
@@ -45,13 +45,13 @@
       AppView.prototype.el = '#budjet-app';
 
       AppView.prototype.initialize = function() {
-        this.Action = new exports.ActionView(function() {
+        this.action = new exports.ActionView(function() {
           return {
             parent: this
           };
         });
-        this.Transactions = new exports.TransactionCollection;
-        return this.Transactions.bind('add', this.add, this);
+        this.transactions = new exports.Transactions;
+        return this.transactions.bind('add', this.add, this);
       };
 
       AppView.prototype.add = function(row) {

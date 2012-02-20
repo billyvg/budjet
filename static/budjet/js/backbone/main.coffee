@@ -6,10 +6,10 @@ namespace 'BJ', (exports) ->
       'click .add-item': 'add'
 
     initialize: ->
-      this.App = this.options.parent
+      @app = this.options.parent
 
     add: ->
-      this.App.Transactions.add new exports.TransactionModel
+      @app.transactions.add new exports.Transaction
 
     render: ->
       ''
@@ -19,9 +19,9 @@ namespace 'BJ', (exports) ->
     el: '#budjet-app'
 
     initialize: ->
-      @Action = new exports.ActionView -> parent: @
-      @Transactions = new exports.TransactionCollection
-      @Transactions.bind 'add', @add, @
+      @action = new exports.ActionView -> parent: @
+      @transactions = new exports.Transactions
+      @transactions.bind 'add', @add, @
 
     add: (row) ->
       view = new exports.TransactionView {model: row}
