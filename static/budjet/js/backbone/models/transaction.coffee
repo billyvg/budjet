@@ -29,12 +29,13 @@ namespace 'BJ', (exports) ->
     totalBalance: (startDate, endDate) ->
       transactions = @filter (transaction) ->
         date = transaction.get 'date'
-        date.compareTo(startDate) >= 0 and date.compareTo(endDate) <= 0
+        return date.compareTo(startDate) >= 0 if not endDate
+        return date.compareTo(endDate) <= 0 if not startDate
+        return date.compareTo(startDate) >= 0 and date.compareTo(endDate) <= 0
 
-      console.log transactions
       @total transactions
 
     estimatedBalance: (startDate, endDate) ->
-      ''
+      true
 
 

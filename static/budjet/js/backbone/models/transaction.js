@@ -67,14 +67,15 @@
         transactions = this.filter(function(transaction) {
           var date;
           date = transaction.get('date');
+          if (!endDate) return date.compareTo(startDate) >= 0;
+          if (!startDate) return date.compareTo(endDate) <= 0;
           return date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0;
         });
-        console.log(transactions);
         return this.total(transactions);
       };
 
       Transactions.prototype.estimatedBalance = function(startDate, endDate) {
-        return '';
+        return true;
       };
 
       return Transactions;
