@@ -25,23 +25,26 @@
       <div class="add-form">
         <form id="transaction-form" class="well">
           <div class="input-append">
-            <input type="text" class="date-form" name="date" placeholder="Date">
+            <input type="text" class="date-form" name="date" placeholder="Date"
+            tabindex="2">
             <span class="add-on calendar"><i class="icon-calendar"></i></span>
           </div>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="text" class="amount-form" name="amount" placeholder="Amount">
+            <input type="text" class="amount-form" name="amount"
+            placeholder="Amount" tabindex="2">
           </div>
           <div>
-            <select class="reoccur-unit" name="reoccur-unit">
+            <select class="recurr-unit" name="reccur_unit" tabindex="5">
               <option>Days</option>
               <option>Weeks</option>
               <option>Months</option>
             </select>
-            <input type="text" class="reoccur-form" name="reoccurs" placeholder="Reoccurs">
+            <input type="text" class="recurr-form" name="recurring"
+            placeholder="Recurrs" tabindex="4">
           </div>
           <textarea class="description-form" name="description"
-            placeholder="Description"></textarea>
+            placeholder="Description" tabindex="6"></textarea>
           <button class="add-item btn btn-primary"><i class="icon-plus
               icon-white"></i> Add</button>
         </form>
@@ -57,9 +60,9 @@
             </span>
           </div>
 
-          <div class="reoccuring-expenses">
+          <div class="recurring-expenses">
             <span class="expense">
-              <span class="label label-important">Reoccuring</span>
+              <span class="label label-important">recurring</span>
               $3,000
             </span>
           </div>
@@ -80,10 +83,10 @@
       <table id="budget-table" class="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Date</th>
             <th>Amount</th>
+            <th>Recurrs</th>
             <th>Description</th>
-            <th>Reoccurs</th>
           </tr>
         </thead>
         <tbody>
