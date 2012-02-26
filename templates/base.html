@@ -52,8 +52,8 @@
       {% raw %}
       <script id="transaction-row-tmpl" type="text/x-handlebars-template">
         <td>{{date_formatted}}</td>
-        <td>{{amount}}</td>
-        <td>{{recurring}}</td>
+        <td>${{amount}}</td>
+        <td>{{recurring}} {{recurr_unit}}</td>
         <td>{{description}}</td>
       </script>
       {% endraw %}
