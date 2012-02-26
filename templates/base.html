@@ -18,6 +18,7 @@
     <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="/static/libs/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/static/libs/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="/static/libs/handlebars/dist/handlebars.js"></script>
     <script type="text/javascript" src="/static/libs/backbone/backbone.js"></script>
     <script type="text/javascript" src="/static/libs/localstorage/backbone.localStorage-min.js"></script>
     <script type="text/javascript" src="/static/libs/date-utils.js"></script>
@@ -28,25 +29,33 @@
     <script type="text/javascript" src="/static/budjet/js/backbone/main.js"></script>
 
     <script type="text/javascript">
-        <!--window.fbAsyncInit = function() {-->
-          <!--FB.init({-->
+      <!--window.fbAsyncInit = function() {-->
+        <!--FB.init({-->
             <!--appId      : '129263473847954',-->
             <!--status     : true, -->
             <!--cookie     : true,-->
             <!--xfbml      : true-->
-          <!--});-->
+            <!--});-->
           <!--FB.Event.subscribe('auth.login', function(response) {-->
               <!--$.post('/login', { response: response });-->
-          <!--});-->
+              <!--});-->
 
-        <!--};-->
-        <!--(function(d){-->
-           <!--var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}-->
-           <!--js = d.createElement('script'); js.id = id; js.async = true;-->
-           <!--js.src = "//connect.facebook.net/en_US/all.js";-->
-           <!--d.getElementsByTagName('head')[0].appendChild(js);-->
-         <!--}(document));-->
+          <!--};-->
+          <!--(function(d){-->
+              <!--var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}-->
+              <!--js = d.createElement('script'); js.id = id; js.async = true;-->
+              <!--js.src = "//connect.facebook.net/en_US/all.js";-->
+              <!--d.getElementsByTagName('head')[0].appendChild(js);-->
+              <!--}(document));-->
     </script>
+    {% block jstemplates %}
+      <script id="transaction-row-tmpl" type="text/x-handlebars-template">
+        <td>{{date}}</td>
+        <td>{{amount}}</td>
+        <td>{{reoccur}}</td>
+        <td>{{description}}</td>
+      </script>
+    {% endblock %}
     {% endblock %}
   </body>
 </html>

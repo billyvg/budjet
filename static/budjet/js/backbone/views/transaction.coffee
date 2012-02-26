@@ -1,10 +1,10 @@
 namespace 'BJ', (exports) ->
   class exports.TransactionView extends Backbone.View
+    template: '#transaction-row-tmpl'
     tagName: 'tr'
 
     render: () ->
-      template = '<td>1</td> <td>1/1/2011</td> <td>$100</td> <td>Temporary Description</td> <td>Yes</td>'
-      $(@el).html template
+      $(@el).html(exports.templater @template)
       @el
 
   class exports.TransactionListView extends Backbone.View
@@ -16,7 +16,7 @@ namespace 'BJ', (exports) ->
         model: model
       }
 
-      $(@el).find('tbody').append(view.render())
+      @$el.find('tbody').append(view.render())
 
     render: () ->
       ''
@@ -30,7 +30,7 @@ namespace 'BJ', (exports) ->
 
 
     add: () ->
-      data = $(@el).serializeArray()
+      data = @$el.serializeArray()
       model = {}
 
       _.each(data, (ele) ->

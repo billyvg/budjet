@@ -11,12 +11,12 @@
         TransactionView.__super__.constructor.apply(this, arguments);
       }
 
+      TransactionView.prototype.template = '#transaction-row-tmpl';
+
       TransactionView.prototype.tagName = 'tr';
 
       TransactionView.prototype.render = function() {
-        var template;
-        template = '<td>1</td> <td>1/1/2011</td> <td>$100</td> <td>Temporary Description</td> <td>Yes</td>';
-        $(this.el).html(template);
+        $(this.el).html(exports.templater(this.template));
         return this.el;
       };
 
@@ -40,7 +40,7 @@
         view = new exports.TransactionView({
           model: model
         });
-        return $(this.el).find('tbody').append(view.render());
+        return this.$el.find('tbody').append(view.render());
       };
 
       TransactionListView.prototype.render = function() {
@@ -68,7 +68,7 @@
 
       TransactionFormView.prototype.add = function() {
         var data, model;
-        data = $(this.el).serializeArray();
+        data = this.$el.serializeArray();
         model = {};
         _.each(data, function(ele) {
           return model[ele.name] = ele.value;

@@ -5,6 +5,9 @@ window.namespace = (target, name, block) ->
   block target, top
 
 namespace 'BJ', (exports) ->
+  exports.templater = (template) ->
+    Handlebars.compile($(template).html())
+
   jQuery ->
     exports.App = new exports.AppView {
       el: '#budjet-app'

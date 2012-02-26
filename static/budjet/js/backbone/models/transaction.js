@@ -18,7 +18,6 @@
       };
 
       Transaction.prototype.initialize = function(attr) {
-        console.log(attr);
         attr.recurring = Number(attr.recurring);
         attr.amount = Number(attr.amount);
         attr.date = new Date(attr.date);
@@ -102,10 +101,8 @@
 
       Transactions.prototype.expected = function(startDate, endDate) {
         return this.dateFilter(startDate, endDate).map(function(transaction) {
-          console.log(transaction, transaction.expected(endDate));
           return transaction.expected(endDate);
         }).reduce(function(memo, num) {
-          console.log(memo);
           return memo + num;
         }, 0);
       };

@@ -6,7 +6,6 @@ namespace 'BJ', (exports) ->
       recurring: 0
 
     initialize: (attr) ->
-      console.log attr
       attr.recurring = Number(attr.recurring)
       attr.amount = Number(attr.amount)
       attr.date = new Date(attr.date)
@@ -15,11 +14,6 @@ namespace 'BJ', (exports) ->
       attr.recurring *= if attr.recurr_unit is 'Week' then 7 else 1
 
       attr.amount = if _.isNumber(attr.amount) then attr.amount else 0
-      #@set {
-        #recurring: recurring
-        #amount: if _.isNumber(amount) then amount else 0
-        #date: date
-      #}
 
     type: () ->
       return '' if @get('amount') is 0
@@ -66,11 +60,9 @@ namespace 'BJ', (exports) ->
     expected: (startDate, endDate) ->
       @dateFilter(startDate, endDate).map(
         (transaction) ->
-          console.log transaction, transaction.expected(endDate)
           transaction.expected(endDate)
       ).reduce(
         (memo, num) ->
-          console.log memo
           memo + num
         , 0)
 

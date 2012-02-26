@@ -16,6 +16,9 @@
   };
 
   namespace('BJ', function(exports) {
+    exports.templater = function(template) {
+      return Handlebars.compile($(template).html());
+    };
     return jQuery(function() {
       return exports.App = new exports.AppView({
         el: '#budjet-app'
