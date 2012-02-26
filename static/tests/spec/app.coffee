@@ -2,31 +2,38 @@ namespace 'BJ', (exports) ->
   describe 'Tests for Transaction Model.', () ->
     beforeEach () ->
       @income = new exports.Transaction {
+        date: new Date(2012, 1, 1)
         amount: 100
         description: 'Testing Income'
-        recurring: true
+        recurring: 14
       }
       @expense = new exports.Transaction {
+        date: new Date(2012, 1, 13)
         amount: -100
         description: 'Testing expense'
-        recurring: true
+        recurring: 5
+      }
+      @single = new exports.Transaction {
+        date: new Date(2012, 1, 1)
+        amount: 1000
+        recurring: false
       }
 
     it 'Can be created with default values', () ->
       transaction = new exports.Transaction
       expect(transaction.get('amount')).toBe 0
       expect(transaction.get('description')).toBe ''
-      expect(transaction.get('recurring')).toBe false
+      expect(transaction.get('recurring')).toBe 0
 
     it 'Can be created with set values', () ->
       transaction = new exports.Transaction {
         amount: 100
         description: 'Testing'
-        recurring: true
+        recurring: 14
       }
       expect(transaction.get('amount')).toBe 100
       expect(transaction.get('description')).toBe 'Testing'
-      expect(transaction.get('recurring')).toBe true
+      expect(transaction.get('recurring')).toBe 14
 
     it 'Is an "expense" if amount is negative', () ->
       expect(@expense.type()).toBe 'expense'
@@ -37,6 +44,31 @@ namespace 'BJ', (exports) ->
     it 'Is empty string if amount is 0', () ->
       @income.set {amount: 0}
       expect(@income.type()).toBe ''
+
+    it '0 if expected() is given a date in the past.', () ->
+      expect(
+        @income.expected(new Date(2011, 2, 1))
+      ).toBe 0
+
+    it 'Non-recurring transactions should only return a single amount.', () ->
+      expect(
+        @single.expected(new Date(2013, 2, 1))
+      ).toBe 1000
+
+    it 'Recurring income every 14 days starting from 2-1-2012 to 3-1-2012, occurs 3 times.', () ->
+      expect(
+        @income.expected(new Date(2012, 2, 1))
+      ).toBe 300
+
+    it 'Recurring expense every 5 days starting from 2-13-2012 to 3-2-2012, occurs 4 times.', () ->
+      expect(
+        @expense.expected(new Date(2012, 2, 2))
+      ).toBe -400
+
+    it 'Recurring transaction with the same start/end date, occurs once.', () ->
+      expect(
+        @expense.expected(new Date(2012, 1, 13))
+      ).toBe -100
 
   describe 'Tests for Transaction Collection', () ->
 
@@ -49,7 +81,7 @@ namespace 'BJ', (exports) ->
         date: new Date(2012, 1, 10)
         amount: 100
         description: 'test'
-        recurring: true
+        recurring: 7
 
       expect(@transactions.models.length).toBe 0
       @transactions.add trans
@@ -118,12 +150,12 @@ namespace 'BJ', (exports) ->
     it 'Calculate the total amount of recurring transactions.', () ->
       expect(
         @transactions.recurringTotal()
-      ).toBe (100-30+22-14+59+49)
+      ).toBe (100-30+22-14+49)
 
     it 'Calculate the total amount of non-recurring transactions.', () ->
       expect(
         @transactions.nonrecurringTotal()
-      ).toBe (10+123)
+      ).toBe (10+123+59)
 
     it 'Sum of transactions before 2-3-2012', () ->
       expect(
@@ -145,12 +177,12 @@ namespace 'BJ', (exports) ->
         @transactions.totalBalance(new Date(2012, 1, 11), new Date(2012, 1, 21))
       ).toBe (22-14+59)
 
-    it 'Calculate the available money in a certain time period.', () ->
+    it 'Calculate the available money on 3-1-2012, with only transactions starting after 2-5-2012.', () ->
       expect(
-        @transactions.estimatedBalance(
-          new Date(2012, 1, 1), new Date(2012, 2, 1)
+        @transactions.expected(
+          new Date(2012, 1, 5), new Date(2012, 2, 1)
         )
-      ).toBe false
+      ).toBe -89
 
   describe 'Tests of the Summary View', () ->
     beforeEach () ->

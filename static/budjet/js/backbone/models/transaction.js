@@ -14,7 +14,16 @@
       Transaction.prototype.defaults = {
         amount: 0,
         description: '',
-        recurring: false
+        recurring: 0
+      };
+
+      Transaction.prototype.initialize = function(attr) {
+        var recurring;
+        recurring = Number(attr.recurring);
+        attr.recurring = _.isNumber(recurring) ? recurring : 0;
+        return this.set({
+          'recurring': attr.recurring
+        });
       };
 
       Transaction.prototype.type = function() {
@@ -24,6 +33,18 @@
         } else {
           return 'expense';
         }
+      };
+
+      Transaction.prototype.expected = function(targetDate) {
+        var daysBetween, numberTx;
+        if (this.get('date').compareTo(targetDate) > 0) return 0;
+        if (this.get('date').compareTo(targetDate) === 0) {
+          return this.get('amount');
+        }
+        if (!this.get('recurring')) return this.get('amount');
+        daysBetween = this.get('date').getDaysBetween(targetDate);
+        numberTx = Math.floor(daysBetween / this.get('recurring')) + 1;
+        return this.get('amount') * numberTx;
       };
 
       return Transaction;
@@ -46,6 +67,16 @@
         }, 0);
       };
 
+      Transactions.prototype.dateFilter = function(startDate, endDate) {
+        return this.filter(function(transaction) {
+          var date;
+          date = transaction.get('date');
+          if (!endDate) return date.compareTo(startDate) >= 0;
+          if (!startDate) return date.compareTo(endDate) <= 0;
+          return date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0;
+        });
+      };
+
       Transactions.prototype.recurringTotal = function() {
         var recurring;
         recurring = this.filter(function(transaction) {
@@ -64,18 +95,18 @@
 
       Transactions.prototype.totalBalance = function(startDate, endDate) {
         var transactions;
-        transactions = this.filter(function(transaction) {
-          var date;
-          date = transaction.get('date');
-          if (!endDate) return date.compareTo(startDate) >= 0;
-          if (!startDate) return date.compareTo(endDate) <= 0;
-          return date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0;
-        });
+        transactions = this.dateFilter(startDate, endDate);
         return this.total(transactions);
       };
 
-      Transactions.prototype.estimatedBalance = function(startDate, endDate) {
-        return true;
+      Transactions.prototype.expected = function(startDate, endDate) {
+        return this.dateFilter(startDate, endDate).map(function(transaction) {
+          console.log(transaction, transaction.expected(endDate));
+          return transaction.expected(endDate);
+        }).reduce(function(memo, num) {
+          console.log(memo);
+          return memo + num;
+        }, 0);
       };
 
       return Transactions;

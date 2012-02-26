@@ -4,14 +4,21 @@
     describe('Tests for Transaction Model.', function() {
       beforeEach(function() {
         this.income = new exports.Transaction({
+          date: new Date(2012, 1, 1),
           amount: 100,
           description: 'Testing Income',
-          recurring: true
+          recurring: 14
         });
-        return this.expense = new exports.Transaction({
+        this.expense = new exports.Transaction({
+          date: new Date(2012, 1, 13),
           amount: -100,
           description: 'Testing expense',
-          recurring: true
+          recurring: 5
+        });
+        return this.single = new exports.Transaction({
+          date: new Date(2012, 1, 1),
+          amount: 1000,
+          recurring: false
         });
       });
       it('Can be created with default values', function() {
@@ -19,18 +26,18 @@
         transaction = new exports.Transaction;
         expect(transaction.get('amount')).toBe(0);
         expect(transaction.get('description')).toBe('');
-        return expect(transaction.get('recurring')).toBe(false);
+        return expect(transaction.get('recurring')).toBe(0);
       });
       it('Can be created with set values', function() {
         var transaction;
         transaction = new exports.Transaction({
           amount: 100,
           description: 'Testing',
-          recurring: true
+          recurring: 14
         });
         expect(transaction.get('amount')).toBe(100);
         expect(transaction.get('description')).toBe('Testing');
-        return expect(transaction.get('recurring')).toBe(true);
+        return expect(transaction.get('recurring')).toBe(14);
       });
       it('Is an "expense" if amount is negative', function() {
         return expect(this.expense.type()).toBe('expense');
@@ -38,11 +45,26 @@
       it('Is "income" if amount is positive', function() {
         return expect(this.income.type()).toBe('income');
       });
-      return it('Is empty string if amount is 0', function() {
+      it('Is empty string if amount is 0', function() {
         this.income.set({
           amount: 0
         });
         return expect(this.income.type()).toBe('');
+      });
+      it('0 if expected() is given a date in the past.', function() {
+        return expect(this.income.expected(new Date(2011, 2, 1))).toBe(0);
+      });
+      it('Non-recurring transactions should only return a single amount.', function() {
+        return expect(this.single.expected(new Date(2013, 2, 1))).toBe(1000);
+      });
+      it('Recurring income every 14 days starting from 2-1-2012 to 3-1-2012, occurs 3 times.', function() {
+        return expect(this.income.expected(new Date(2012, 2, 1))).toBe(300);
+      });
+      it('Recurring expense every 5 days starting from 2-13-2012 to 3-2-2012, occurs 4 times.', function() {
+        return expect(this.expense.expected(new Date(2012, 2, 2))).toBe(-400);
+      });
+      return it('Recurring transaction with the same start/end date, occurs once.', function() {
+        return expect(this.expense.expected(new Date(2012, 1, 13))).toBe(-100);
       });
     });
     describe('Tests for Transaction Collection', function() {
@@ -55,7 +77,7 @@
           date: new Date(2012, 1, 10),
           amount: 100,
           description: 'test',
-          recurring: true
+          recurring: 7
         };
         expect(this.transactions.models.length).toBe(0);
         this.transactions.add(trans);
@@ -128,10 +150,10 @@
         });
       });
       it('Calculate the total amount of recurring transactions.', function() {
-        return expect(this.transactions.recurringTotal()).toBe(100 - 30 + 22 - 14 + 59 + 49);
+        return expect(this.transactions.recurringTotal()).toBe(100 - 30 + 22 - 14 + 49);
       });
       it('Calculate the total amount of non-recurring transactions.', function() {
-        return expect(this.transactions.nonrecurringTotal()).toBe(10 + 123);
+        return expect(this.transactions.nonrecurringTotal()).toBe(10 + 123 + 59);
       });
       it('Sum of transactions before 2-3-2012', function() {
         return expect(this.transactions.totalBalance('', new Date(2012, 2, 3))).toBe(100 - 30 + 22 - 14 + 59 + 10 + 123);
@@ -145,8 +167,8 @@
       it('Sum of transactions between 1-11-2012 and 1-21-2012.', function() {
         return expect(this.transactions.totalBalance(new Date(2012, 1, 11), new Date(2012, 1, 21))).toBe(22 - 14 + 59);
       });
-      return it('Calculate the available money in a certain time period.', function() {
-        return expect(this.transactions.estimatedBalance(new Date(2012, 1, 1), new Date(2012, 2, 1))).toBe(false);
+      return it('Calculate the available money on 3-1-2012, with only transactions starting after 2-5-2012.', function() {
+        return expect(this.transactions.expected(new Date(2012, 1, 5), new Date(2012, 2, 1))).toBe(-89);
       });
     });
     return describe('Tests of the Summary View', function() {
