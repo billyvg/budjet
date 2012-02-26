@@ -49,12 +49,14 @@
               <!--}(document));-->
     </script>
     {% block jstemplates %}
+      {% raw %}
       <script id="transaction-row-tmpl" type="text/x-handlebars-template">
-        <td>{{date}}</td>
+        <td>{{date_formatted}}</td>
         <td>{{amount}}</td>
-        <td>{{reoccur}}</td>
+        <td>{{recurring}}</td>
         <td>{{description}}</td>
       </script>
+      {% endraw %}
     {% endblock %}
     {% endblock %}
   </body>
