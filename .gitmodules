@@ -7,3 +7,6 @@
 [submodule "static/libs/underscore"]
 	path = static/libs/underscore
 	url = https://github.com/documentcloud/underscore/
+[submodule "static/libs/handlebars"]
+	path = static/libs/handlebars
+	url = https://github.com/wycats/handlebars.js.git

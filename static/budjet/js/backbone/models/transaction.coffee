@@ -6,10 +6,20 @@ namespace 'BJ', (exports) ->
       recurring: 0
 
     initialize: (attr) ->
-      recurring = Number(attr.recurring)
+      console.log attr
+      attr.recurring = Number(attr.recurring)
+      attr.amount = Number(attr.amount)
+      attr.date = new Date(attr.date)
 
-      attr.recurring = if _.isNumber(recurring) then recurring else 0
-      @set {recurring: attr.recurring}
+      attr.recurring = if _.isNumber(attr.recurring) then attr.recurring else 0
+      attr.recurring *= if attr.recurr_unit is 'Week' then 7 else 1
+
+      attr.amount = if _.isNumber(attr.amount) then attr.amount else 0
+      #@set {
+        #recurring: recurring
+        #amount: if _.isNumber(amount) then amount else 0
+        #date: date
+      #}
 
     type: () ->
       return '' if @get('amount') is 0

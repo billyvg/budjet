@@ -18,12 +18,13 @@
       };
 
       Transaction.prototype.initialize = function(attr) {
-        var recurring;
-        recurring = Number(attr.recurring);
-        attr.recurring = _.isNumber(recurring) ? recurring : 0;
-        return this.set({
-          recurring: attr.recurring
-        });
+        console.log(attr);
+        attr.recurring = Number(attr.recurring);
+        attr.amount = Number(attr.amount);
+        attr.date = new Date(attr.date);
+        attr.recurring = _.isNumber(attr.recurring) ? attr.recurring : 0;
+        attr.recurring *= attr.recurr_unit === 'Week' ? 7 : 1;
+        return attr.amount = _.isNumber(attr.amount) ? attr.amount : 0;
       };
 
       Transaction.prototype.type = function() {
