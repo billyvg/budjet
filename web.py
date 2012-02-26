@@ -12,16 +12,7 @@ if os.environ.get("APP_ENV") != "PROD":
 
 @app.route("/")
 def index():
-    fb_user = {}
-    try:
-        fb_cookie = _get_fb_cookie(request)
-        r = requests.get('https://graph.facebook.com/me?access_token=%s' % fb_cookie['access_token'])
-        fb_user = json.loads(r.content)
-        session['user_id'] = r.content.id
-        session['user_fb_profile'] = r.content
-    except:
-        print sys.exc_info()
-    return render_template("index.html", fb_user=fb_user)
+    return render_template("index.html")
 
 @app.route('/resume')
 def resume():
