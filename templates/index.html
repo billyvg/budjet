@@ -22,6 +22,30 @@
 
   <div id="budget-app" class="container-fluid">
     <div class="sidebar span3">
+      <div class="add-form">
+        <form id="transaction-form" class="well">
+          <div class="input-append">
+            <input type="text" class="date-form" name="date" placeholder="Date">
+            <span class="add-on calendar"><i class="icon-calendar"></i></span>
+          </div>
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <input type="text" class="amount-form" name="amount" placeholder="Amount">
+          </div>
+          <div>
+            <select class="reoccur-unit" name="reoccur-unit">
+              <option>Days</option>
+              <option>Weeks</option>
+              <option>Months</option>
+            </select>
+            <input type="text" class="reoccur-form" name="reoccurs" placeholder="Reoccurs">
+          </div>
+          <textarea class="description-form" name="description"
+            placeholder="Description"></textarea>
+          <button class="add-item btn btn-primary"><i class="icon-plus
+              icon-white"></i> Add</button>
+        </form>
+      </div>
       <div class="well">
         <h5>Summary</h5>
         <ul class="unstyled">
@@ -49,12 +73,11 @@
 
       <ul id="budget-actions" class="unstyled">
         <li>
-        <div class="add-item btn btn-primary">+ Add Item</div>
         </li>
       </ul>
 
 
-      <table class="budget-table table table-striped">
+      <table id="budget-table" class="table table-striped">
         <thead>
           <tr>
             <th>#</th>
