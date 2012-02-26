@@ -4,7 +4,7 @@ namespace 'BJ', (exports) ->
     tagName: 'tr'
 
     render: () ->
-      $(@el).html(exports.templater @template)
+      $(@el).html((exports.templater(@template))(@model.toJSON()))
       @el
 
   class exports.TransactionListView extends Backbone.View

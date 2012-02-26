@@ -16,7 +16,7 @@
       TransactionView.prototype.tagName = 'tr';
 
       TransactionView.prototype.render = function() {
-        $(this.el).html(exports.templater(this.template));
+        $(this.el).html((exports.templater(this.template))(this.model.toJSON()));
         return this.el;
       };
 
