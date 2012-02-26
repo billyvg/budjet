@@ -18,7 +18,7 @@
           collection: this.transactions
         });
         return this.transactionList = new exports.TransactionListView({
-          el: '#budjet-table',
+          el: '#budget-table',
           collection: this.transactions
         });
       };

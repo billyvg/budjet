@@ -8,7 +8,7 @@ namespace 'BJ', (exports) ->
         collection: @transactions
       }
       @transactionList = new exports.TransactionListView {
-        el: '#budjet-table'
+        el: '#budget-table'
         collection: @transactions
       }
 
