@@ -18,11 +18,11 @@ body {
 .add-form .amount-form {
   width: auto;
 }
-.add-form .reoccur-form {
+.add-form .recurr-form {
   overflow: hidden;
   width: 84px;
 }
-.add-form .reoccur-unit {
+.add-form .recurr-unit {
   float: right;
   width: auto;
 }
