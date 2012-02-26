@@ -23,12 +23,14 @@
         attr.date = new Date(attr.date);
         attr.recurring = _.isNumber(attr.recurring) ? attr.recurring : 0;
         attr.recurring *= attr.recurr_unit === 'Week' ? 7 : 1;
-        return attr.amount = _.isNumber(attr.amount) ? attr.amount : 0;
+        attr.amount = _.isNumber(attr.amount) ? attr.amount : 0;
+        attr.date_formatted = attr.date.toFormat('MM-D-YYYY');
+        return this.set(attr);
       };
 
       Transaction.prototype.type = function() {
-        if (this.get('amount') === 0) return '';
-        if (this.get('amount') > 0) {
+        if (this.get('amount' === 0)) return '';
+        if (this.get('amount' > 0)) {
           return 'income';
         } else {
           return 'expense';
@@ -37,14 +39,14 @@
 
       Transaction.prototype.expected = function(targetDate) {
         var daysBetween, numberTx;
-        if (this.get('date').compareTo(targetDate) > 0) return 0;
-        if (this.get('date').compareTo(targetDate) === 0) {
+        if (this.get('date').compareTo(targetDate > 0)) return 0;
+        if (this.get('date').compareTo(targetDate === 0)) {
           return this.get('amount');
         }
         if (!this.get('recurring')) return this.get('amount');
-        daysBetween = this.get('date').getDaysBetween(targetDate);
+        daysBetween = this.get('date').getDaysBetweentargetDate;
         numberTx = Math.floor(daysBetween / this.get('recurring')) + 1;
-        return this.get('amount') * numberTx;
+        return this.get('amount' * numberTx);
       };
 
       return Transaction;
@@ -71,9 +73,9 @@
         return this.filter(function(transaction) {
           var date;
           date = transaction.get('date');
-          if (!endDate) return date.compareTo(startDate) >= 0;
-          if (!startDate) return date.compareTo(endDate) <= 0;
-          return date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0;
+          if (!endDate) return date.compareTo(startDate >= 0);
+          if (!startDate) return date.compareTo(endDate <= 0);
+          return date.compareTo(startDate >= 0 && date.compareTo(endDate <= 0));
         });
       };
 
