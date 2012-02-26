@@ -17,9 +17,12 @@
           el: '#transaction-form',
           collection: this.transactions
         });
-        return this.transactionList = new exports.TransactionListView({
+        this.transactionList = new exports.TransactionListView({
           el: '#budget-table',
           collection: this.transactions
+        });
+        return this.transactions.fetch({
+          add: true
         });
       };
 

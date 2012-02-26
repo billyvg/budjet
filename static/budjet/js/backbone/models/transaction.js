@@ -25,7 +25,8 @@
         attr.recurring *= attr.recurr_unit === 'Week' ? 7 : 1;
         attr.amount = _.isNumber(attr.amount) ? attr.amount : 0;
         attr.date_formatted = attr.date.toFormat('MM-D-YYYY');
-        return this.set(attr);
+        this.set(attr);
+        return this.save();
       };
 
       Transaction.prototype.type = function() {
@@ -61,6 +62,8 @@
       }
 
       Transactions.prototype.model = exports.Transaction;
+
+      Transactions.prototype.localStorage = new Store('Transactions');
 
       Transactions.prototype.total = function(coll) {
         if (coll == null) coll = this.models;

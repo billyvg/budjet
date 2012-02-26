@@ -16,6 +16,7 @@ namespace 'BJ', (exports) ->
         model: model
       }
 
+      #model.save()
       @$el.find('tbody').append(view.render())
 
     render: () ->

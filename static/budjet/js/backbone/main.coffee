@@ -3,6 +3,7 @@ namespace 'BJ', (exports) ->
 
     initialize: ->
       @transactions = new exports.Transactions
+
       @form = new exports.TransactionFormView {
         el: '#transaction-form'
         collection: @transactions
@@ -10,6 +11,10 @@ namespace 'BJ', (exports) ->
       @transactionList = new exports.TransactionListView {
         el: '#budget-table'
         collection: @transactions
+      }
+
+      @transactions.fetch {
+        add: true
       }
 
     render: ->

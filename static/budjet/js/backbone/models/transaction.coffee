@@ -16,6 +16,7 @@ namespace 'BJ', (exports) ->
       attr.amount = if _.isNumber attr.amount then attr.amount else 0
       attr.date_formatted = attr.date.toFormat 'MM-D-YYYY'
       @set attr
+      @save()
 
     type: () ->
       return '' if @get 'amount' is 0
@@ -33,6 +34,8 @@ namespace 'BJ', (exports) ->
 
   class exports.Transactions extends Backbone.Collection
     model: exports.Transaction
+
+    localStorage: new Store 'Transactions'
 
     total: (coll = @models) ->
       _.reduce coll
