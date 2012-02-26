@@ -1,0 +1,40 @@
+body {
+    padding-top: 60px;
+}
+
+.logged-in {
+    color: #e6e6e6;
+    line-height: 40px;
+    .user {
+        color: #fefefe;
+    }
+}
+
+.add-form {
+  .calendar {
+    cursor: pointer;
+  }
+
+  .date-form {
+    overflow: hidden;
+    width: auto;
+  }
+
+  .amount-form {
+    width: auto;
+  }
+
+  .reoccur-form {
+    overflow: hidden;
+    width: 84px;
+  }
+
+  .reoccur-unit {
+    float: right;
+    width: auto;
+  }
+
+  .description-form {
+    width: 170px;
+  }
+}
