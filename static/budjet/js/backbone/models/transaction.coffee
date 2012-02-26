@@ -7,8 +7,9 @@ namespace 'BJ', (exports) ->
 
     initialize: (attr) ->
       recurring = Number(attr.recurring)
+
       attr.recurring = if _.isNumber(recurring) then recurring else 0
-      @set {'recurring': attr.recurring}
+      @set {recurring: attr.recurring}
 
     type: () ->
       return '' if @get('amount') is 0

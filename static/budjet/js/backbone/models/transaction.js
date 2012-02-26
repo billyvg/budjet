@@ -22,7 +22,7 @@
         recurring = Number(attr.recurring);
         attr.recurring = _.isNumber(recurring) ? recurring : 0;
         return this.set({
-          'recurring': attr.recurring
+          recurring: attr.recurring
         });
       };
 

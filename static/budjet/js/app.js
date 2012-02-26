@@ -17,7 +17,9 @@
 
   namespace('BJ', function(exports) {
     return jQuery(function() {
-      return exports.App = new exports.AppView();
+      return exports.App = new exports.AppView({
+        el: '#budjet-app'
+      });
     });
   });
 

@@ -6,4 +6,6 @@ window.namespace = (target, name, block) ->
 
 namespace 'BJ', (exports) ->
   jQuery ->
-    exports.App = new exports.AppView()
+    exports.App = new exports.AppView {
+      el: '#budjet-app'
+    }
